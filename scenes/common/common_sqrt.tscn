@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce653mcbskfma"]
+
+[ext_resource type="PackedScene" uid="uid://dwno2bgp3vc5g" path="res://scenes/text_line/text_line.tscn" id="1_bth1r"]
+[ext_resource type="Script" path="res://scenes/common/common_sqrt.gd" id="1_qbkou"]
+[ext_resource type="PackedScene" uid="uid://0fvqe3pi4fpd" path="res://scenes/keyboard/key_board.tscn" id="2_y6g2a"]
+
+[node name="CommonSqrt" type="GridContainer"]
+script = ExtResource("1_qbkou")
+
+[node name="Input" parent="." instance=ExtResource("1_bth1r")]
+layout_mode = 2
+line_title = "Ввод"
+
+[node name="Output" parent="." instance=ExtResource("1_bth1r")]
+layout_mode = 2
+line_title = "Вывод"
+editable = false
+
+[node name="KeyBoard" parent="." instance=ExtResource("2_y6g2a")]
+layout_mode = 2
+size_flags_horizontal = 4

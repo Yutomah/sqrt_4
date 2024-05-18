@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwno2bgp3vc5g"]
+
+[ext_resource type="Script" path="res://scenes/text_line/text_line.gd" id="1_8pu0u"]
+
+[sub_resource type="SystemFont" id="SystemFont_07v5v"]
+subpixel_positioning = 0
+
+[node name="TextLine" type="VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+offset_right = 8.0
+offset_bottom = 35.0
+script = ExtResource("1_8pu0u")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_07v5v")
+text = "Real"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "0"
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+drag_and_drop_selection_enabled = false
+
+[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]

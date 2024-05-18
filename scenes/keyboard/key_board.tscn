@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://0fvqe3pi4fpd"]
+
+[ext_resource type="PackedScene" uid="uid://cgn2nyae0iur6" path="res://scenes/keyboard/key.tscn" id="1_1mqmv"]
+[ext_resource type="Script" path="res://scenes/keyboard/key_board.gd" id="1_aevby"]
+
+[node name="KeyBoard" type="PanelContainer"]
+script = ExtResource("1_aevby")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="Key1" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+
+[node name="Key2" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "2"
+
+[node name="Key3" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "3"
+
+[node name="Key4" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "4"
+
+[node name="Key5" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "5"
+
+[node name="Key6" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "6"
+
+[node name="Key7" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "7"
+
+[node name="Key8" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "8"
+
+[node name="Key9" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "9"
+
+[node name="KeyPoint" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "."
+
+[node name="Key0" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "0"
+
+[node name="KeyC" parent="MarginContainer/GridContainer" instance=ExtResource("1_1mqmv")]
+layout_mode = 2
+text = "⌫"
+
+[connection signal="pressed" from="MarginContainer/GridContainer/Key1" to="." method="_on_key_1_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key2" to="." method="_on_key_2_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key3" to="." method="_on_key_3_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key4" to="." method="_on_key_4_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key5" to="." method="_on_key_5_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key6" to="." method="_on_key_6_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key7" to="." method="_on_key_7_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key8" to="." method="_on_key_8_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key9" to="." method="_on_key_9_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/KeyPoint" to="." method="_on_key_point_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/Key0" to="." method="_on_key_0_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/KeyC" to="." method="_on_key_c_pressed"]

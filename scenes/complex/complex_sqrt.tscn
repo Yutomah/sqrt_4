@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://uq0t04xgy7ky"]
+
+[ext_resource type="PackedScene" uid="uid://dwno2bgp3vc5g" path="res://scenes/text_line/text_line.tscn" id="1_hfpfq"]
+
+[node name="ComplexSqrt" type="GridContainer"]
+visible = false
+columns = 2
+
+[node name="TextLine" parent="." instance=ExtResource("1_hfpfq")]
+layout_mode = 2
+
+[node name="TextLine2" parent="." instance=ExtResource("1_hfpfq")]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="TextLine3" parent="." instance=ExtResource("1_hfpfq")]
+layout_mode = 2
+
+[node name="TextLine4" parent="." instance=ExtResource("1_hfpfq")]
+layout_mode = 2
+size_flags_horizontal = 10
