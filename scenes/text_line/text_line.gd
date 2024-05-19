@@ -1,5 +1,5 @@
 extends VBoxContainer
-
+class_name text_line
 @export var line_title_ru:String = "текст"
 @export var line_title_en:String = "text"
 
@@ -7,7 +7,7 @@ extends VBoxContainer
 @export var line_size:int = 16
 @export var key_board:KeyBoard = null
 signal text_changed(new_text, new_caret_pos, text_line)
-@onready var line_edit = $LineEdit
+@onready var line_edit = $HBoxContainer/LineEdit
 
 @export var is_main_keyboard:bool = true
 
@@ -45,7 +45,7 @@ func change_old_caret_pos(new_pos):
 	old_caret_pos = new_pos
 
 func on_add_symbol(symbol):
-	if line_edit.has_focus() or (is_main_keyboard and get_viewport().gui_get_focus_owner() == null):
+	if line_edit.has_focus() or (is_main_keyboard and !get_viewport().gui_get_focus_owner() is text_line):
 		line_edit.grab_focus()
 		line_edit.insert_text_at_caret(symbol)
 		text_changed.emit(line_edit.text, line_edit.caret_column, self)
@@ -64,3 +64,6 @@ func on_change_language(lang):
 			$Label.text = line_title_ru
 		"en":
 			$Label.text = line_title_en
+
+func play_key_sound():
+	$AudioStreamPlayer2D.play()

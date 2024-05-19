@@ -11,6 +11,7 @@ func on_text_changed(new_text, new_caret_pos, text_line):
 		"valid":
 			text_line.change_old_text(new_text)
 			text_line.change_old_caret_pos(new_caret_pos)
+			text_line.play_key_sound()
 			$Output.change_text(SqrtComputator.get_bignum_sqrt(new_text, $HBoxContainer/SpinBox.value))
 		"incorect":
 			GB.show_message.emit("Неправильный символ")

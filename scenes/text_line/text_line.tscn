@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwno2bgp3vc5g"]
+[gd_scene load_steps=6 format=3 uid="uid://dwno2bgp3vc5g"]
 
 [ext_resource type="Script" path="res://scenes/text_line/text_line.gd" id="1_8pu0u"]
+[ext_resource type="Script" path="res://scenes/text_line/LineEdit.gd" id="2_op2jr"]
+[ext_resource type="AudioStream" uid="uid://lv30nrtdxhx7" path="res://sounds/key_press_sound.wav" id="3_bt8vx"]
+[ext_resource type="Script" path="res://scenes/text_line/Copy.gd" id="3_vymut"]
 
 [sub_resource type="SystemFont" id="SystemFont_07v5v"]
 subpixel_positioning = 0
@@ -16,12 +19,27 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_07v5v")
 text = "Real"
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "0"
 context_menu_enabled = false
 virtual_keyboard_enabled = false
 clear_button_enabled = true
 drag_and_drop_selection_enabled = false
+script = ExtResource("2_op2jr")
 
-[connection signal="text_changed" from="LineEdit" to="." method="_on_line_edit_text_changed"]
+[node name="Copy" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
+text = "📋"
+script = ExtResource("3_vymut")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bt8vx")
+
+[connection signal="text_changed" from="HBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="HBoxContainer/Copy" to="HBoxContainer/Copy" method="_on_pressed"]

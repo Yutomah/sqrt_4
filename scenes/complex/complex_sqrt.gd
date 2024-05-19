@@ -12,6 +12,7 @@ func on_text_changed(new_text, new_caret_pos, text_line):
 	if result:
 		text_line.change_old_text(new_text)
 		text_line.change_old_caret_pos(new_caret_pos)
+		text_line.play_key_sound()
 	else:
 		GB.show_message.emit("Неправильный символ")
 		text_line.return_to_old_text()
@@ -24,6 +25,7 @@ func on_text_changed(new_text, new_caret_pos, text_line):
 	var result_img = SqrtComputator.is_valid_complex_sqrt(img_text)
 	if result_real and result_img:
 		var complex_sqrt = SqrtComputator.get_complex_sqrt(real_text, img_text)
+		
 		$RealOutput.change_text(complex_sqrt[0])
 		$ImgOutput.change_text(complex_sqrt[1])
 		

@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://cgn2nyae0iur6"]
+[gd_scene load_steps=3 format=3 uid="uid://cgn2nyae0iur6"]
+
+[ext_resource type="Script" path="res://scenes/keyboard/key.gd" id="1_fp836"]
+[ext_resource type="AudioStream" uid="uid://lv30nrtdxhx7" path="res://sounds/key_press_sound.wav" id="2_78m4g"]
 
 [node name="Key" type="Button"]
 custom_minimum_size = Vector2(40, 40)
@@ -6,3 +9,9 @@ offset_right = 8.0
 offset_bottom = 8.0
 focus_mode = 0
 text = "1"
+script = ExtResource("1_fp836")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_78m4g")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

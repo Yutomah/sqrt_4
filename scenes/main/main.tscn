@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ddchmguqumnrf"]
+[gd_scene load_steps=19 format=3 uid="uid://ddchmguqumnrf"]
 
 [ext_resource type="PackedScene" uid="uid://ce653mcbskfma" path="res://scenes/common/common_sqrt.tscn" id="1_0m4hr"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_7eare"]
@@ -9,7 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://uq0t04xgy7ky" path="res://scenes/complex/complex_sqrt.tscn" id="3_4nucp"]
 [ext_resource type="Script" path="res://scenes/main/Audio.gd" id="3_un1i4"]
 [ext_resource type="Script" path="res://scenes/main/Translate.gd" id="4_84mr6"]
+[ext_resource type="AudioStream" uid="uid://bbg38i4fl355l" path="res://sounds/error_sound.wav" id="4_pqdt1"]
 [ext_resource type="Script" path="res://scenes/main/Theme.gd" id="5_xdok3"]
+[ext_resource type="Script" path="res://scenes/main/HSlider.gd" id="6_ypbym"]
+[ext_resource type="AudioStream" uid="uid://lv30nrtdxhx7" path="res://sounds/key_press_sound.wav" id="7_b1gyp"]
 [ext_resource type="Script" path="res://scenes/main/AcceptDialog.gd" id="8_o1n5a"]
 [ext_resource type="Script" path="res://scenes/main/Обычный корень.gd" id="8_umhhx"]
 [ext_resource type="Script" path="res://scenes/main/Длинный корень.gd" id="10_88f6f"]
@@ -57,6 +60,9 @@ max_lines_visible = 2
 [node name="Timer" type="Timer" parent="Message"]
 one_shot = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Message"]
+stream = ExtResource("4_pqdt1")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -75,7 +81,7 @@ alignment = 2
 [node name="Audio" type="Button" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-text = "З"
+text = "🔈"
 script = ExtResource("3_un1i4")
 
 [node name="Popup" type="Popup" parent="HBoxContainer/PanelContainer/VBoxContainer/Audio"]
@@ -98,6 +104,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
+value = 0.5
+script = ExtResource("6_ypbym")
 
 [node name="Translate" type="Button" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
@@ -179,8 +187,12 @@ script = ExtResource("12_p28xy")
 [node name="ComplexSqrt" parent="HBoxContainer/TabContainer/Комплексный корень" instance=ExtResource("3_4nucp")]
 layout_mode = 2
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_b1gyp")
+
 [connection signal="timeout" from="Message/Timer" to="Message" method="_on_timer_timeout"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Audio" to="HBoxContainer/PanelContainer/VBoxContainer/Audio" method="_on_pressed"]
+[connection signal="drag_ended" from="HBoxContainer/PanelContainer/VBoxContainer/Audio/Popup/HBoxContainer/HSlider" to="HBoxContainer/PanelContainer/VBoxContainer/Audio/Popup/HBoxContainer/HSlider" method="_on_drag_ended"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Translate" to="HBoxContainer/PanelContainer/VBoxContainer/Translate" method="_on_pressed"]
 [connection signal="id_pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Translate/PopupMenu" to="HBoxContainer/PanelContainer/VBoxContainer/Translate" method="_on_popup_menu_id_pressed"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Theme" to="HBoxContainer/PanelContainer/VBoxContainer/Theme" method="_on_pressed"]
