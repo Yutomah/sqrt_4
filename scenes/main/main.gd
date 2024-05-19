@@ -7,6 +7,5 @@ func _ready():
 	GB.change_theme.connect(on_theme_change)
 	
 func on_theme_change(current_theme):
-	print("theme")
 	theme = current_theme
 	

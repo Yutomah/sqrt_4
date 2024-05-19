@@ -1,6 +1,18 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://jwktneryrp2u"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://jwktneryrp2u"]
 
 [ext_resource type="Texture2D" uid="uid://bx3y05abq4ecv" path="res://sprites/unfold.png" id="1_umnor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1btow"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.877616, 0.877616, 0.877616, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7kvxm"]
 bg_color = Color(0.758191, 0.758192, 0.758191, 1)
@@ -84,6 +96,7 @@ border_color = Color(0.614745, 0.614745, 0.614744, 1)
 bg_color = Color(1, 1, 1, 0)
 
 [resource]
+AcceptDialog/styles/panel = SubResource("StyleBoxFlat_1btow")
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)

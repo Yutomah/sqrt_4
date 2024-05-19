@@ -1,6 +1,8 @@
 extends VBoxContainer
 
-@export var line_title:String = "text"
+@export var line_title_ru:String = "текст"
+@export var line_title_en:String = "text"
+
 @export var editable:bool = true
 @export var line_size:int = 16
 @export var key_board:KeyBoard = null
@@ -16,7 +18,9 @@ func _ready():
 	if key_board != null:
 		key_board.add_symbol.connect(on_add_symbol)
 		key_board.remove_symbol.connect(on_remove_symbol)
-	$Label.text = line_title
+		
+	GB.change_language.connect(on_change_language)
+	$Label.text = line_title_en
 	line_edit.editable = editable
 	
 func _on_line_edit_text_changed(new_text):
@@ -53,3 +57,10 @@ func on_remove_symbol():
 		line_edit.delete_char_at_caret()
 		text_changed.emit(line_edit.text, line_edit.caret_column, self)
 	
+
+func on_change_language(lang):
+	match(lang):
+		"ru":
+			$Label.text = line_title_ru
+		"en":
+			$Label.text = line_title_en

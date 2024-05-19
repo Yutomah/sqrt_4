@@ -25,6 +25,5 @@ func on_text_changed(new_text, new_caret_pos, text_line):
 
 
 func _on_spin_box_value_changed(value):
-	print("spin")
 	var new_text = $Input.get_current_text()
 	$Output.change_text(SqrtComputator.get_bignum_sqrt(new_text, value))

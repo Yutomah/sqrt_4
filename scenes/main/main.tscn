@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddchmguqumnrf"]
+[gd_scene load_steps=16 format=3 uid="uid://ddchmguqumnrf"]
 
 [ext_resource type="PackedScene" uid="uid://ce653mcbskfma" path="res://scenes/common/common_sqrt.tscn" id="1_0m4hr"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_7eare"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://scenes/main/Audio.gd" id="3_un1i4"]
 [ext_resource type="Script" path="res://scenes/main/Translate.gd" id="4_84mr6"]
 [ext_resource type="Script" path="res://scenes/main/Theme.gd" id="5_xdok3"]
+[ext_resource type="Script" path="res://scenes/main/AcceptDialog.gd" id="8_o1n5a"]
+[ext_resource type="Script" path="res://scenes/main/Обычный корень.gd" id="8_umhhx"]
+[ext_resource type="Script" path="res://scenes/main/Длинный корень.gd" id="10_88f6f"]
+[ext_resource type="Script" path="res://scenes/main/Комплексный корень.gd" id="12_p28xy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhxna"]
 bg_color = Color(0.870588, 0.517647, 0.509804, 0.501961)
@@ -98,7 +102,7 @@ step = 0.01
 [node name="Translate" type="Button" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-text = "П"
+text = "译"
 script = ExtResource("4_84mr6")
 
 [node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/PanelContainer/VBoxContainer/Translate"]
@@ -125,6 +129,7 @@ script = ExtResource("2_r6lmw")
 title = "Помощь"
 initial_position = 2
 size = Vector2i(723, 300)
+visible = true
 dialog_text = "Эта программа имеет 3 вкладки: 
 Обычный корень -  для вычисления обычных корней
 Длинный корень - для вычисления корней от больших чисел с заданной точностью
@@ -132,6 +137,7 @@ dialog_text = "Эта программа имеет 3 вкладки:
 
 Тех поддержка: 
 Электронная почта - coolsqrtapp@gmail.com"
+script = ExtResource("8_o1n5a")
 
 [node name="TabContainer" type="TabContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -143,6 +149,7 @@ theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
+script = ExtResource("8_umhhx")
 
 [node name="CommonSqrt" parent="HBoxContainer/TabContainer/Обычный корень" instance=ExtResource("1_0m4hr")]
 layout_mode = 2
@@ -154,6 +161,7 @@ theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
+script = ExtResource("10_88f6f")
 
 [node name="LongSqrt" parent="HBoxContainer/TabContainer/Длинный корень" instance=ExtResource("2_0sv4h")]
 layout_mode = 2
@@ -166,6 +174,7 @@ theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
+script = ExtResource("12_p28xy")
 
 [node name="ComplexSqrt" parent="HBoxContainer/TabContainer/Комплексный корень" instance=ExtResource("3_4nucp")]
 layout_mode = 2
@@ -173,5 +182,6 @@ layout_mode = 2
 [connection signal="timeout" from="Message/Timer" to="Message" method="_on_timer_timeout"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Audio" to="HBoxContainer/PanelContainer/VBoxContainer/Audio" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Translate" to="HBoxContainer/PanelContainer/VBoxContainer/Translate" method="_on_pressed"]
+[connection signal="id_pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Translate/PopupMenu" to="HBoxContainer/PanelContainer/VBoxContainer/Translate" method="_on_popup_menu_id_pressed"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Theme" to="HBoxContainer/PanelContainer/VBoxContainer/Theme" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Help" to="HBoxContainer/PanelContainer/VBoxContainer/Help" method="_on_pressed"]

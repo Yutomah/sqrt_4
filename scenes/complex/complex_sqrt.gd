@@ -26,6 +26,5 @@ func on_text_changed(new_text, new_caret_pos, text_line):
 		var complex_sqrt = SqrtComputator.get_complex_sqrt(real_text, img_text)
 		$RealOutput.change_text(complex_sqrt[0])
 		$ImgOutput.change_text(complex_sqrt[1])
-		print(complex_sqrt)
 		
 	

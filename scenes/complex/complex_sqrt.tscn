@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://uq0t04xgy7ky"]
+[gd_scene load_steps=6 format=3 uid="uid://uq0t04xgy7ky"]
 
 [ext_resource type="PackedScene" uid="uid://dwno2bgp3vc5g" path="res://scenes/text_line/text_line.tscn" id="1_hfpfq"]
 [ext_resource type="Script" path="res://scenes/complex/complex_sqrt.gd" id="1_npmb5"]
+[ext_resource type="Script" path="res://scenes/complex/Input.gd" id="2_uaks5"]
 [ext_resource type="PackedScene" uid="uid://0fvqe3pi4fpd" path="res://scenes/keyboard/key_board.tscn" id="3_iy14o"]
+[ext_resource type="Script" path="res://scenes/complex/Output.gd" id="4_p5atj"]
 
 [node name="ComplexSqrt" type="GridContainer"]
 anchors_preset = 15
@@ -14,25 +16,45 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_npmb5")
 
+[node name="Input" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Ввод"
+script = ExtResource("2_uaks5")
+
 [node name="RealInput" parent="." node_paths=PackedStringArray("key_board") instance=ExtResource("1_hfpfq")]
 layout_mode = 2
-line_title = "Реальная часть числа"
+line_title_ru = "Реальная часть числа"
+line_title_en = "Real part of a number"
 key_board = NodePath("../KeyBoard")
 
 [node name="ImgInput" parent="." node_paths=PackedStringArray("key_board") instance=ExtResource("1_hfpfq")]
 layout_mode = 2
-line_title = "Мнимая часть числа"
+line_title_ru = "Мнимая часть числа"
+line_title_en = "Imaginary part of a number"
 key_board = NodePath("../KeyBoard")
 is_main_keyboard = false
 
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Output" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Вывод"
+script = ExtResource("4_p5atj")
+
 [node name="RealOutput" parent="." instance=ExtResource("1_hfpfq")]
 layout_mode = 2
-line_title = "Реальная часть числа"
+line_title_ru = "Реальная часть числа"
+line_title_en = "Real part of a number"
 editable = false
 
 [node name="ImgOutput" parent="." instance=ExtResource("1_hfpfq")]
 layout_mode = 2
-line_title = "Мнимая часть числа"
+line_title_ru = "Мнимая часть числа"
+line_title_en = "Imaginary part of a number"
 editable = false
 
 [node name="KeyBoard" parent="." instance=ExtResource("3_iy14o")]

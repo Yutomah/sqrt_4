@@ -11,12 +11,14 @@ script = ExtResource("1_qbkou")
 
 [node name="Input" parent="." node_paths=PackedStringArray("key_board") instance=ExtResource("1_bth1r")]
 layout_mode = 2
-line_title = "Ввод"
+line_title_ru = "Ввод"
+line_title_en = "Input"
 key_board = NodePath("../KeyBoard")
 
 [node name="Output" parent="." instance=ExtResource("1_bth1r")]
 layout_mode = 2
-line_title = "Вывод"
+line_title_ru = "Вывод"
+line_title_en = "Output"
 editable = false
 
 [node name="KeyBoard" parent="." instance=ExtResource("2_y6g2a")]
