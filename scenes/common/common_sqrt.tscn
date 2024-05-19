@@ -5,11 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://0fvqe3pi4fpd" path="res://scenes/keyboard/key_board.tscn" id="2_y6g2a"]
 
 [node name="CommonSqrt" type="GridContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_qbkou")
 
-[node name="Input" parent="." instance=ExtResource("1_bth1r")]
+[node name="Input" parent="." node_paths=PackedStringArray("key_board") instance=ExtResource("1_bth1r")]
 layout_mode = 2
 line_title = "Ввод"
+key_board = NodePath("../KeyBoard")
 
 [node name="Output" parent="." instance=ExtResource("1_bth1r")]
 layout_mode = 2

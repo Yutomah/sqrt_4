@@ -40,8 +40,8 @@ public partial class sqrt_computator : Node2D
         
         if(result >= 0)
             return "valid";
-        else
-            return "negative";
+        
+        return "negative";
     }
 
 
@@ -53,24 +53,37 @@ public partial class sqrt_computator : Node2D
         bigRational = BigRational.Sqrt(bigRational, int_prec);
         return bigRational.ToString(str_prec);
     }
-    public bool is_valid_bignum_sqrt(string num){
+    public string is_valid_bignum_sqrt(string num){
+        if(num == "")
+            return "valid";
+
         BigRational result;
-        return BigRational.TryParse(num, 
-            new NumberFormatInfo(){NumberDecimalSeparator = "."}, out result);
+        if(!BigRational.TryParse(num, 
+            new NumberFormatInfo(){NumberDecimalSeparator = ".", NumberGroupSeparator = ""}, out result))
+            return "incorect";
+
+        if(result >= 0)
+            return "valid";
+        
+        return "negative";
     }
 
 
 
 
-    public string get_complex_sqrt(double real, double imaginary)
+    public Godot.Collections.Array<string> get_complex_sqrt(double real, double imaginary)
     {
         Complex num = new Complex(real, imaginary);
         num = Complex.Sqrt(num);
-        return num.ToString();
+        string real_part = num.Real.ToString();
+        string imaginary_part = num.Imaginary.ToString();
+        return new Godot.Collections.Array<string>(){real_part, imaginary_part};
     }
     public bool is_valid_complex_sqrt(string num){
+        if(num == "" || num == "-")
+            return true;
+        
         double result;
-
         if(!Double.TryParse(num, new NumberFormatInfo(){NumberDecimalSeparator = "."}, out result))
             return false;
 

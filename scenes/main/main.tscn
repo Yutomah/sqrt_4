@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddchmguqumnrf"]
+[gd_scene load_steps=12 format=3 uid="uid://ddchmguqumnrf"]
 
 [ext_resource type="PackedScene" uid="uid://ce653mcbskfma" path="res://scenes/common/common_sqrt.tscn" id="1_0m4hr"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_7eare"]
 [ext_resource type="Script" path="res://scenes/main/Message.gd" id="1_kbuhq"]
+[ext_resource type="Theme" uid="uid://jwktneryrp2u" path="res://themes/white.tres" id="1_yo5r1"]
 [ext_resource type="PackedScene" uid="uid://pbsjvq64sqc1" path="res://scenes/long/long_sqrt.tscn" id="2_0sv4h"]
+[ext_resource type="Script" path="res://scenes/main/Help.gd" id="2_r6lmw"]
 [ext_resource type="PackedScene" uid="uid://uq0t04xgy7ky" path="res://scenes/complex/complex_sqrt.tscn" id="3_4nucp"]
+[ext_resource type="Script" path="res://scenes/main/Audio.gd" id="3_un1i4"]
+[ext_resource type="Script" path="res://scenes/main/Translate.gd" id="4_84mr6"]
+[ext_resource type="Script" path="res://scenes/main/Theme.gd" id="5_xdok3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhxna"]
+bg_color = Color(0.870588, 0.517647, 0.509804, 0.501961)
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -12,8 +21,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_yo5r1")
+script = ExtResource("1_7eare")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Message" type="PanelContainer" parent="."]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -21,6 +43,7 @@ anchor_right = 1.0
 offset_top = 50.0
 offset_right = -50.0
 grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nhxna")
 script = ExtResource("1_kbuhq")
 
 [node name="Label" type="Label" parent="Message"]
@@ -30,16 +53,7 @@ max_lines_visible = 2
 [node name="Timer" type="Timer" parent="Message"]
 one_shot = true
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,24 +61,105 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Обычный корень" type="MarginContainer" parent="TabContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Audio" type="Button" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "З"
+script = ExtResource("3_un1i4")
+
+[node name="Popup" type="Popup" parent="HBoxContainer/PanelContainer/VBoxContainer/Audio"]
+initial_position = 1
+size = Vector2i(200, 100)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer/Audio/Popup"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/Audio/Popup/HBoxContainer"]
+layout_mode = 2
+text = "Громкость"
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer/PanelContainer/VBoxContainer/Audio/Popup/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+
+[node name="Translate" type="Button" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "П"
+script = ExtResource("4_84mr6")
+
+[node name="PopupMenu" type="PopupMenu" parent="HBoxContainer/PanelContainer/VBoxContainer/Translate"]
+initial_position = 1
+item_count = 2
+item_0/text = "Русский"
+item_0/id = 0
+item_1/text = "English"
+item_1/id = 1
+
+[node name="Theme" type="Button" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "◐"
+script = ExtResource("5_xdok3")
+
+[node name="Help" type="Button" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "?"
+script = ExtResource("2_r6lmw")
+
+[node name="AcceptDialog" type="AcceptDialog" parent="HBoxContainer/PanelContainer/VBoxContainer/Help"]
+title = "Помощь"
+initial_position = 2
+size = Vector2i(723, 300)
+dialog_text = "Эта программа имеет 3 вкладки: 
+Обычный корень -  для вычисления обычных корней
+Длинный корень - для вычисления корней от больших чисел с заданной точностью
+Комплексный корень - для вычисления корней от комплексных чисел
+
+Тех поддержка: 
+Электронная почта - coolsqrtapp@gmail.com"
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Обычный корень" type="MarginContainer" parent="HBoxContainer/TabContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="CommonSqrt" parent="TabContainer/Обычный корень" instance=ExtResource("1_0m4hr")]
+[node name="CommonSqrt" parent="HBoxContainer/TabContainer/Обычный корень" instance=ExtResource("1_0m4hr")]
 layout_mode = 2
 
-[node name="Длинный корень" type="MarginContainer" parent="TabContainer"]
+[node name="Длинный корень" type="MarginContainer" parent="HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="LongSqrt" parent="TabContainer/Длинный корень" instance=ExtResource("2_0sv4h")]
+[node name="LongSqrt" parent="HBoxContainer/TabContainer/Длинный корень" instance=ExtResource("2_0sv4h")]
 layout_mode = 2
+size_flags_horizontal = 1
 
-[node name="Комплексный корень" type="MarginContainer" parent="TabContainer"]
+[node name="Комплексный корень" type="MarginContainer" parent="HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 30
@@ -72,7 +167,11 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="ComplexSqrt" parent="TabContainer/Комплексный корень" instance=ExtResource("3_4nucp")]
+[node name="ComplexSqrt" parent="HBoxContainer/TabContainer/Комплексный корень" instance=ExtResource("3_4nucp")]
 layout_mode = 2
 
 [connection signal="timeout" from="Message/Timer" to="Message" method="_on_timer_timeout"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Audio" to="HBoxContainer/PanelContainer/VBoxContainer/Audio" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Translate" to="HBoxContainer/PanelContainer/VBoxContainer/Translate" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Theme" to="HBoxContainer/PanelContainer/VBoxContainer/Theme" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/VBoxContainer/Help" to="HBoxContainer/PanelContainer/VBoxContainer/Help" method="_on_pressed"]

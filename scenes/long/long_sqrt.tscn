@@ -1,4 +1,42 @@
-[gd_scene format=3 uid="uid://pbsjvq64sqc1"]
+[gd_scene load_steps=4 format=3 uid="uid://pbsjvq64sqc1"]
+
+[ext_resource type="Script" path="res://scenes/long/long_sqrt.gd" id="1_qubkl"]
+[ext_resource type="PackedScene" uid="uid://dwno2bgp3vc5g" path="res://scenes/text_line/text_line.tscn" id="2_e41hi"]
+[ext_resource type="PackedScene" uid="uid://0fvqe3pi4fpd" path="res://scenes/keyboard/key_board.tscn" id="3_sqerf"]
 
 [node name="LongSqrt" type="GridContainer"]
-visible = false
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("1_qubkl")
+
+[node name="Input" parent="." node_paths=PackedStringArray("key_board") instance=ExtResource("2_e41hi")]
+layout_mode = 2
+size_flags_horizontal = 3
+line_title = "Ввод"
+key_board = NodePath("../KeyBoard")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Точность"
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer"]
+layout_mode = 2
+max_value = 1000.0
+value = 10.0
+
+[node name="Output" parent="." instance=ExtResource("2_e41hi")]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+line_title = "Вывод"
+editable = false
+is_main_keyboard = false
+
+[node name="KeyBoard" parent="." instance=ExtResource("3_sqerf")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[connection signal="value_changed" from="HBoxContainer/SpinBox" to="." method="_on_spin_box_value_changed"]

@@ -1,21 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://uq0t04xgy7ky"]
+[gd_scene load_steps=4 format=3 uid="uid://uq0t04xgy7ky"]
 
 [ext_resource type="PackedScene" uid="uid://dwno2bgp3vc5g" path="res://scenes/text_line/text_line.tscn" id="1_hfpfq"]
+[ext_resource type="Script" path="res://scenes/complex/complex_sqrt.gd" id="1_npmb5"]
+[ext_resource type="PackedScene" uid="uid://0fvqe3pi4fpd" path="res://scenes/keyboard/key_board.tscn" id="3_iy14o"]
 
 [node name="ComplexSqrt" type="GridContainer"]
-visible = false
-columns = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_npmb5")
 
-[node name="TextLine" parent="." instance=ExtResource("1_hfpfq")]
+[node name="RealInput" parent="." node_paths=PackedStringArray("key_board") instance=ExtResource("1_hfpfq")]
 layout_mode = 2
+line_title = "Реальная часть числа"
+key_board = NodePath("../KeyBoard")
 
-[node name="TextLine2" parent="." instance=ExtResource("1_hfpfq")]
+[node name="ImgInput" parent="." node_paths=PackedStringArray("key_board") instance=ExtResource("1_hfpfq")]
 layout_mode = 2
-size_flags_horizontal = 10
+line_title = "Мнимая часть числа"
+key_board = NodePath("../KeyBoard")
+is_main_keyboard = false
 
-[node name="TextLine3" parent="." instance=ExtResource("1_hfpfq")]
+[node name="RealOutput" parent="." instance=ExtResource("1_hfpfq")]
 layout_mode = 2
+line_title = "Реальная часть числа"
+editable = false
 
-[node name="TextLine4" parent="." instance=ExtResource("1_hfpfq")]
+[node name="ImgOutput" parent="." instance=ExtResource("1_hfpfq")]
 layout_mode = 2
-size_flags_horizontal = 10
+line_title = "Мнимая часть числа"
+editable = false
+
+[node name="KeyBoard" parent="." instance=ExtResource("3_iy14o")]
+layout_mode = 2
+size_flags_horizontal = 4

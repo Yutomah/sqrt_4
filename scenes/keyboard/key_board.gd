@@ -1,5 +1,5 @@
 extends PanelContainer
-
+class_name KeyBoard
 
 signal add_symbol(symbol)
 signal remove_symbol()
